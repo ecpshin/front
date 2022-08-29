@@ -1,0 +1,28 @@
+form {
+	row-gap: 1.5rem;
+}
+input,
+button {
+	height: 50px;
+	border: 1px solid hsl(190, 3%, 63%);
+	border-radius: 8px;
+}
+input {
+	padding: 1rem;
+}
+input:focus {
+	border: none;
+	outline: 2px solid rgb(179, 179, 179);
+}
+.container-signin {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.signin-title {
+	text-align: center;
+	font-size: 2rem;
+	margin: 20px 0;
+}

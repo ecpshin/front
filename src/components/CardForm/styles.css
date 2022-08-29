@@ -1,0 +1,11 @@
+form {
+	width: 100%;
+	height: auto;
+
+	display: flex;
+	flex-direction: column;
+}
+.card-form {
+	width: 400px;
+	height: auto;
+}
