@@ -10,8 +10,9 @@ export default function CardForm() {
 			nome: "",
 			cpf: "",
 			email: "",
-			senha: "",
 			telefone: "00 0 0000 0000",
+			senha: "",
+			confirmaSenha: "",
 		});
 		return;
 	}

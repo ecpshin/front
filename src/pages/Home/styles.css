@@ -51,6 +51,9 @@ img {
 	align-items: center;
 }
 
-.item-active {
+.active {
 	border-right: 3px solid var(--magenta);
+}
+.no-active {
+	border: none;
 }

@@ -8,9 +8,18 @@ export default function useUserProvider() {
 		nome: "",
 		cpf: "",
 		email: "",
-		senha: "",
 		telefone: "00 0 0000 0000",
+		senha: "",
+		confirmaSenha: "",
 	});
+
+	function handleInputChange(e) {
+		e.preventDefault();
+		const { name, value } = e.target;
+		setForm({ ...form, [name]: value });
+		console.log(form);
+		return;
+	}
 
 	return {
 		form,
@@ -18,5 +27,6 @@ export default function useUserProvider() {
 		user,
 		setUser,
 		navigate,
+		handleInputChange,
 	};
 }
