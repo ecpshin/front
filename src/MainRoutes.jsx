@@ -1,4 +1,6 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import Charges from "./pages/Charges";
+import Clients from "./pages/Clients";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -12,6 +14,8 @@ export default function MainRoutes() {
 			</Route>
 			<Route element={<ProtectedRoutes redirectTo={"/"} />}>
 				<Route path='/home' element={<Home />} />
+				<Route path='/clients' element={<Clients />} />
+				<Route path='/charges' element={<Charges />} />
 			</Route>
 		</Routes>
 	);
