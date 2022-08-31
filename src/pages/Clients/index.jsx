@@ -1,11 +1,40 @@
+import LoupeIcon from "@mui/icons-material/Loupe";
+import axios from "axios";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import useGeneral from "../../hooks/useGeneral";
-
 import "./styles.css";
 
 export default function Clients() {
-	const { api, clientsForm, handleChangeClientsForm } = useGeneral();
+	const { api, clientsForm, setClientsForm, handleChangeClientsForm } =
+		useGeneral();
+
+	function handleCep() {
+		try {
+			axios
+				.get(`https://viacep.com.br/ws/${clientsForm.cep}/json/`)
+				.then((res) => {
+					const {
+						cep,
+						bairro,
+						complemento,
+						localidade,
+						logradouro,
+						uf,
+					} = res.data;
+					setClientsForm({
+						cep: cep.replace("-", ""),
+						bairro,
+						complemento,
+						cidade: localidade,
+						logradouro,
+						estado: uf,
+					});
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	async function handleRegisterClient(e) {
 		e.preventDefault();
@@ -36,6 +65,7 @@ export default function Clients() {
 							type='text'
 							name='nome'
 							value={clientsForm.nome}
+							defaultValue={""}
 							onChange={(e) => handleChangeClientsForm(e)}
 							required
 							placeholder='Nome'
@@ -65,13 +95,25 @@ export default function Clients() {
 							onChange={(e) => handleChangeClientsForm(e)}
 							placeholder='Telefone'
 						/>
-						<input
-							type='text'
-							name='cep'
-							value={clientsForm.cep}
-							onChange={(e) => handleChangeClientsForm(e)}
-							placeholder='CEP'
-						/>
+						<div style={{ display: "flex", alignItems: "center" }}>
+							<input
+								style={{ width: "100%" }}
+								id='cep'
+								type='text'
+								name='cep'
+								value={clientsForm.cep}
+								onChange={(e) => handleChangeClientsForm(e)}
+								placeholder='CEP'
+							/>
+							<LoupeIcon
+								onClick={handleCep}
+								sx={{
+									cursor: "pointer",
+									width: 40,
+									height: 40,
+								}}
+							/>
+						</div>
 						<input
 							type='text'
 							name='logradouro'
@@ -83,6 +125,7 @@ export default function Clients() {
 							type='text'
 							name='complemento'
 							value={clientsForm.complemento}
+							defaultValue={""}
 							onChange={(e) => handleChangeClientsForm(e)}
 							placeholder='Complemento'
 						/>
@@ -97,13 +140,15 @@ export default function Clients() {
 							type='text'
 							name='cidade'
 							value={clientsForm.cidade}
+							defaultValue={""}
 							onChange={(e) => handleChangeClientsForm(e)}
 							placeholder='Cidade'
 						/>
 						<input
 							type='text'
 							name='estado'
-							value={clientsForm.uf}
+							value={clientsForm.estado}
+							defaultValue={""}
 							onChange={(e) => handleChangeClientsForm(e)}
 							placeholder='Estado'
 						/>
